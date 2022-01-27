@@ -1,0 +1,13 @@
+---
+- name: Include tasks with users specs
+  include_tasks: task.yml
+  vars:
+    dotfiles_repo: "{{ item.dotfiles_repo }}"
+    dotfiles_repo_version: "{{ item.dotfiles_repo_version }}"
+    dotfiles_repo_accept_hostkey: "{{ item.dotfiles_repo_accept_hostkey }}"
+    dotfiles_repo_local_destination: "{{ item.dotfiles_repo_local_destination }}"
+    dotfiles_files: "{{ item.dotfiles_files }}"
+    dotfiles_home: "{{ item.dotfiles_home }}"
+  with_items: "{{ dotfile_user }}"
+  loop_control:
+    loop_var: outer_item

@@ -1,0 +1,32 @@
+---
+- name: Ensure dotfiles repository is cloned locally.
+  git:
+    repo: "{{ outer_item.dotfiles_repo }}"
+    dest: "{{ outer_item.dotfiles_repo_local_destination }}"
+    version: "{{ outer_item.dotfiles_repo_version }}"
+    accept_hostkey: "{{ outer_item.dotfiles_repo_accept_hostkey }}"
+  environment:
+    HTTP_PROXY: "{{ http_proxy | default() }}"
+    HTTPS_PROXY: "{{ http_proxy | default() }}"
+- name: Ensure all configured dotfiles are links.
+  command: "ls -F {{ outer_item.dotfiles_home }}/{{ item }}"
+  register: existing_dotfile_info
+  failed_when: false
+  check_mode: false
+  changed_when: false
+  with_items: "{{ outer_item.dotfiles_files }}"
+
+- name: Remove existing dotfiles file if a replacement is being linked.
+  file:
+    path: "{{ outer_item.dotfiles_home }}/{{ outer_item.dotfiles_files[item.0] }}"
+    state: absent
+  when: "'@' not in item.1.stdout"
+  with_indexed_items: "{{ existing_dotfile_info.results }}"
+
+- name: Link dotfiles into home folder.
+  file:
+    src: "{{ outer_item.dotfiles_repo_local_destination }}/{{ item }}"
+    dest: "{{ outer_item.dotfiles_home }}/{{ item }}"
+    state: link
+    mode: 0644
+  with_items: "{{ outer_item.dotfiles_files }}"

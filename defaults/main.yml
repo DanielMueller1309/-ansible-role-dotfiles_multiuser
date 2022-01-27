@@ -1,0 +1,13 @@
+---
+dotfile_user:
+  - username: daniel
+    dotfiles_repo: "https://github.com/DanielMueller1309/dotfiles.git"
+    dotfiles_repo_version: master
+    dotfiles_repo_accept_hostkey: false
+    dotfiles_repo_local_destination: "/home/daniel/Git/dotfiles"
+    dotfiles_home: "/home/daniel"
+    dotfiles_files:
+      - .bashrc
+      - .tmux.conf
+      - .gitignore
+      - .vimrc
