@@ -9,6 +9,7 @@ dotfile_user:
     dotfiles_repo_local_destination: "/home/daniel/Git/dotfiles"
     dotfiles_home: "/home/daniel"
     vundle_dest: "/home/daniel/.vim/bundle/Vundle.vim"
+    vundle_plugins_dest: "/home/daniel/.vim/bundle/"
     dotfiles_files:
       - .bashrc
       - .tmux.conf
