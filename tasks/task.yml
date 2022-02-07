@@ -17,6 +17,13 @@
     HTTP_PROXY: "{{ http_proxy | default() }}"
     HTTPS_PROXY: "{{ http_proxy | default() }}"
 
+- name: Change vundle dest ownership, group and permissions
+  ansible.builtin.file:
+    path: "{{ outer_item.vundle_dest }}"
+    owner: "{{ outer_item }}"
+    group: "{{ outer_item }}"
+    mode: '0775'
+
 - name: Ensure all configured dotfiles are links.
   command: "ls -F {{ outer_item.dotfiles_home }}/{{ item }}"
   register: existing_dotfile_info
