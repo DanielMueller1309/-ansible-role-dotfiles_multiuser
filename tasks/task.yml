@@ -8,6 +8,15 @@
   environment:
     HTTP_PROXY: "{{ http_proxy | default() }}"
     HTTPS_PROXY: "{{ http_proxy | default() }}"
+
+- name: Ensure vundle repository is cloned locally.
+  git:
+    repo: "{{ vundle_repo }}"
+    dest: "{{ outer_item.vundle_dest }}"
+  environment:
+    HTTP_PROXY: "{{ http_proxy | default() }}"
+    HTTPS_PROXY: "{{ http_proxy | default() }}"
+
 - name: Ensure all configured dotfiles are links.
   command: "ls -F {{ outer_item.dotfiles_home }}/{{ item }}"
   register: existing_dotfile_info

@@ -8,6 +8,7 @@
     dotfiles_repo_local_destination: "{{ item.dotfiles_repo_local_destination }}"
     dotfiles_files: "{{ item.dotfiles_files }}"
     dotfiles_home: "{{ item.dotfiles_home }}"
+    vundle_dest: "{{ item.vundle_dest }}"
   with_items: "{{ dotfile_user }}"
   loop_control:
     loop_var: outer_item

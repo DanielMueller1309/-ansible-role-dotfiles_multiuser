@@ -1,4 +1,6 @@
 ---
+vundle_repo: "https://github.com/VundleVim/Vundle.vim.git"
+#http_proxy:
 dotfile_user:
   - username: daniel
     dotfiles_repo: "https://github.com/DanielMueller1309/dotfiles.git"
@@ -6,6 +8,7 @@ dotfile_user:
     dotfiles_repo_accept_hostkey: false
     dotfiles_repo_local_destination: "/home/daniel/Git/dotfiles"
     dotfiles_home: "/home/daniel"
+    vundle_dest: "/home/daniel/.vim/bundle/Vundle.vim"
     dotfiles_files:
       - .bashrc
       - .tmux.conf
