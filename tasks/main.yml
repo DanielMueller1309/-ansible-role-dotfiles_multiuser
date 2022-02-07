@@ -9,6 +9,7 @@
     dotfiles_files: "{{ item.dotfiles_files }}"
     dotfiles_home: "{{ item.dotfiles_home }}"
     vundle_dest: "{{ item.vundle_dest }}"
+    vundle_plugins_dest: "{{ item.vundle_plugins_dest }}"
   with_items: "{{ dotfile_user }}"
   loop_control:
     loop_var: outer_item
