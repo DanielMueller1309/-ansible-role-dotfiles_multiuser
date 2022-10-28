@@ -5,10 +5,27 @@
     dest: "{{ outer_item.dotfiles_repo_local_destination }}"
     version: "{{ outer_item.dotfiles_repo_version }}"
     accept_hostkey: "{{ outer_item.dotfiles_repo_accept_hostkey }}"
+    force: true
   environment:
     HTTP_PROXY: "{{ http_proxy | default() }}"
     HTTPS_PROXY: "{{ http_proxy | default() }}"
-
+  become: true
+  #
+  #- name: "check repo file dir exist for User: {{ outer_item.username }}"
+  #    ansible.builtin.ansible.builtin.stat:
+  #      path: "{{ outer_item.dotfiles_repo }}"
+  #    register: repopath
+  #
+  #- name: "Set repo dir ownership, group and permissions for User: {{ outer_item.username }}"
+  #  ansible.builtin.file:
+  #    path: "{{ outer_item.dotfiles_repo }}"
+  #    owner: "{{ outer_item.username }}"
+  #    group: "{{ outer_item.username }}"
+  #    state: directory
+  #    mode: '0775'
+  #  become: true
+  #  when: repopath.exists
+  #
 - name: "Ensure vundle repository is cloned locally for User: {{ outer_item.username }}"
   git:
     repo: "{{ vundle_repo }}"
